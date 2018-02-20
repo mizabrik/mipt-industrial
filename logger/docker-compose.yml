@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  server:
+    build: ./server
+    depends_on:
+      - db
+      - rabbitmq
+    networks:
+      - backend
+
+  db:
+    image: mvertes/alpine-mongo
+    networks:
+      - backend
+
+  rabbitmq:
+    image: rabbitmq:alpine
+    networks:
+      - public
+      - backend
+
+networks:
+  public:
+  
+  backend:
