@@ -1,8 +1,15 @@
 version: "3"
 
 services:
-  server:
-    build: ./server
+  producer:
+    build: ./producer
+    depends_on:
+      - rabbitmq
+    networks:
+      - public
+
+  consumer:
+    build: ./consumer
     depends_on:
       - db
       - rabbitmq
